@@ -19,8 +19,8 @@ public class MinHeap {
         if (parent_index == -1) {
             return;
         }
-        int item_value = heap_data.get(index).getValue();
-        int parent_value = heap_data.get(parent_index).getValue();
+        double item_value = heap_data.get(index).getValue();
+        double parent_value = heap_data.get(parent_index).getValue();
         if (item_value < parent_value) {
             swap(index, parent_index);
             heapUp(parent_index);
@@ -65,8 +65,8 @@ public class MinHeap {
         int left_index = getLeftChild(index);
 
         int heap_size = heap_data.size();
-        int this_value = heap_data.get(index).getValue();
-        int right_value, left_value;
+        double this_value = heap_data.get(index).getValue();
+        double right_value, left_value;
 
         if (left_index >= heap_size) {
             left_value = this_value;
@@ -102,9 +102,9 @@ public class MinHeap {
         }
     }
 
-    public void setValue(int index, int value){
+    public void setValue(int index, double value){
         MinHeapItem item = heap_data.get(index);
-        int current_value = item.getValue();
+        double current_value = item.getValue();
         item.setValue(value);
         if (current_value > value){
             heapUp(index);
@@ -112,6 +112,10 @@ public class MinHeap {
         if (current_value < value){
             heapDown(index);
         }
+    }
+
+    public boolean isEmpty(){
+        return heap_data.size() == 0;
     }
 
     public void printHeapSort(){
