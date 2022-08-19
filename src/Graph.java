@@ -3,6 +3,10 @@ import java.util.ArrayList;
 public class Graph {
     ArrayList<Vertex> vertices;
 
+    /**
+     * constructor
+     * @param vertex_count number of vertices in the graph
+     */
     Graph(int vertex_count){
         vertices = new ArrayList<>();
         for (int i = 0; i < vertex_count; i++){
@@ -10,19 +14,39 @@ public class Graph {
         }
     }
 
+    /**
+     * adds a new vertex to the graph
+     */
     public void addVertex(){
         vertices.add(new Vertex(vertices.size(),0));
     }
 
+    /**
+     * adds a new edge from the graph
+     * @param from from which vertex
+     * @param to to which vertex
+     * @param weight weight of the edge
+     */
     public void addEdge(int from, int to, int weight){
         Edge edge = new Edge(vertices.get(from), vertices.get(to), weight);
         vertices.get(from).addEdge(edge);
     }
 
+    /**
+     * gets a vertex in the graph
+     * @param index index of the vertex
+     * @return the vertex
+     */
     public Vertex getVertex(int index){
         return vertices.get(index);
     }
 
+    /**
+     * the dijkstra shortest path algorithm
+     * @param from from which vertex
+     * @param to to which vertex
+     * @return an array list of the vertices to go through if a path exists, null if no path exists
+     */
     public ArrayList<Integer> dijkstra(int from, int to){
         MinHeap minHeap = new MinHeap();
         ArrayList<Integer> path = new ArrayList<>();

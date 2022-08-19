@@ -3,10 +3,18 @@ import java.util.ArrayList;
 public class MinHeap {
     public final ArrayList<MinHeapItem> heap_data;
 
+    /**
+     * constructor
+     */
     MinHeap(){
         heap_data = new ArrayList<>();
     }
 
+
+    /**
+     * added a new item to the min heap
+     * @param item new item
+     */
     public void addItem(MinHeapItem item){
         int index = heap_data.size();
         heap_data.add(item);
@@ -14,6 +22,10 @@ public class MinHeap {
         heapUp(index);
     }
 
+    /**
+     * HeapUp function
+     * @param index index to HeapUp
+     */
     public void heapUp(int index){
         if (index == 0){
             return;
@@ -28,6 +40,11 @@ public class MinHeap {
 
     }
 
+    /**
+     * a function to swap the items between 2 indexs
+     * @param index1 index of item 1
+     * @param index2 index of item 2
+     */
     private void swap(int index1, int index2){
         MinHeapItem item1 = heap_data.get(index1);
         MinHeapItem item2 = heap_data.get(index2);
@@ -37,18 +54,37 @@ public class MinHeap {
         heap_data.set(index2,item1);
     }
 
+    /**
+     * get index of parent from index
+     * @param index index
+     * @return parent's index
+     */
     public int getParent(int index) {
         return (index-1)/2;
     }
 
+    /**
+     * get index of right child from index
+     * @param index index
+     * @return right child index
+     */
     public int getRightChild(int index) {
         return index*2+2;
     }
 
+    /**
+     * get left child index from index
+     * @param index index
+     * @return left child index
+     */
     public int getLeftChild(int index) {
         return index*2+1;
     }
 
+    /**
+     * get the item at the top of the heap
+     * @return the smallest item
+     */
     public MinHeapItem pop(){
         MinHeapItem output = heap_data.get(0);
 
@@ -64,6 +100,10 @@ public class MinHeap {
         return output;
     }
 
+    /**
+     * HeapDown function
+     * @param index index of item to HeapDown
+     */
     public void heapDown(int index){
         int right_index = getRightChild(index);
         int left_index = getLeftChild(index);
@@ -99,13 +139,11 @@ public class MinHeap {
 
     }
 
-    public void printHeap(){
-        for (MinHeapItem item: heap_data){
-            System.out.print(item.getValue());
-            System.out.println(" ");
-        }
-    }
-
+    /**
+     * a function to set the value of an item in the heap
+     * @param index heap
+     * @param value new value
+     */
     public void setValue(int index, double value){
         MinHeapItem item = heap_data.get(index);
         double current_value = item.getValue();
@@ -118,19 +156,11 @@ public class MinHeap {
         }
     }
 
+    /**
+     * @return true if the heap is empty, false otherwise
+     */
     public boolean isEmpty(){
         return heap_data.size() == 0;
     }
-
-    public void printHeapSort(){
-        while (heap_data.size() > 0){
-            System.out.print(pop().getValue());
-            System.out.print(" ");
-        }
-    }
-
-
-
-
 
 }
