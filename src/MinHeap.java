@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class MinHeap {
-    private final ArrayList<MinHeapItem> heap_data;
+    public final ArrayList<MinHeapItem> heap_data;
 
     MinHeap(){
         heap_data = new ArrayList<>();
@@ -15,10 +15,10 @@ public class MinHeap {
     }
 
     public void heapUp(int index){
-        int parent_index = getParent(index);
-        if (parent_index == -1) {
+        if (index == 0){
             return;
         }
+        int parent_index = getParent(index);
         double item_value = heap_data.get(index).getValue();
         double parent_value = heap_data.get(parent_index).getValue();
         if (item_value < parent_value) {
@@ -51,12 +51,16 @@ public class MinHeap {
 
     public MinHeapItem pop(){
         MinHeapItem output = heap_data.get(0);
+
+        MinHeapItem newTop = heap_data.get(heap_data.size()-1);
+        newTop.setIndex(0);
         heap_data.set(0, heap_data.get(heap_data.size()-1));
         heap_data.remove(heap_data.size()-1);
+
         if (heap_data.size() > 0){
             heapDown(0);
         }
-
+        output.setIndex(-1);
         return output;
     }
 

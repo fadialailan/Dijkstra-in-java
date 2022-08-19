@@ -19,14 +19,18 @@ public class Graph {
         vertices.get(from).addEdge(edge);
     }
 
+    public Vertex getVertex(int index){
+        return vertices.get(index);
+    }
+
     public ArrayList<Integer> dijkstra(int from, int to){
         MinHeap minHeap = new MinHeap();
         ArrayList<Integer> path = new ArrayList<>();
 
         for (Vertex vertex : vertices){
-            vertex.setValue(Double.NEGATIVE_INFINITY);
+            vertex.setValue(Double.POSITIVE_INFINITY);
             vertex.setPreviousVertex(null);
-            minHeap.addItem(vertex);
+            vertex.setIndex(-1);
         }
         Vertex first_vertex = vertices.get(from);
         first_vertex.setValue(0);
@@ -36,7 +40,6 @@ public class Graph {
 
         while (!minHeap.isEmpty()) {
             Vertex current_vertex = (Vertex) minHeap.pop();
-
             if (current_vertex.getId() == to) {
                 foundIt = true;
                 break;
